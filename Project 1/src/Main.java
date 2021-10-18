@@ -13,7 +13,6 @@ public class Main {
             Scanner scanner = new Scanner(file);
             FileWriter fileWriter = new FileWriter("output.txt");
 
-
             int count = 0;      // To correctly assign values from file to variables
             int numberOfStates = 1;
             int numberOfVariables = 0;
@@ -24,9 +23,6 @@ public class Main {
             List<Transition> transitions = new ArrayList<>();
             List<String> stringsToDetect = new ArrayList<>();
 
-
-//            states = new String[numberOfStates];
-//            states[0] = "q1";
 
             while (scanner.hasNext()) {
                 String s = scanner.next();
@@ -74,31 +70,23 @@ public class Main {
                     count++;
                 }
                 else if (count == 6) {
-
                     for (int i = 0; i < numberOfStates * numberOfVariables; i++) {
                         String fromState = s;
-//                        System.out.print(s + " ");
                         s = scanner.next();
-//                        System.out.print(s + " ");
                         char variable = s.charAt(0);
                         s = scanner.next();
-//                        System.out.print(s + " ");
                         String toState = s;
 
                         transitions.add(new Transition(fromState, variable, toState));
                         s = scanner.next();
 
                     }
-//                    System.out.println(s);
                     count++;
                 }
 
                 if (count == 7)
                     stringsToDetect.add(s);
-
-
             }
-
 
             /**
              * Print all variables to check correctness with file
@@ -110,12 +98,10 @@ public class Main {
             System.out.println("goal states " + Arrays.toString(goalStates));
             System.out.println("variables " + Arrays.toString(variables));
 
-
             for (Transition i : transitions)
                 System.out.println(i);
             for (String s : stringsToDetect)
                 System.out.println(s);
-
 
             /**
              * Computation
@@ -159,54 +145,10 @@ public class Main {
 
             fileWriter.close();
 
-
-
-
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//
-//
-//        System.out.println("------------------------------------------------");
-//
-//        char[] variables = {'a', 'b'};
-//
-//
-//        List<Transition> transitions = Arrays.asList(
-//                new Transition("q1", 'a', "q1"),
-//                new Transition("q1", 'b', "q2"),
-//                new Transition("q2", 'a', "q2"),
-//                new Transition("q2", 'b', "q1")
-//        );
-//
-//        for (Transition i : transitions)
-//            System.out.println(i.fromState + ' '  + i.variable + ' ' +  i.toState);
-//
-//        String detect = "abaa";
-//        String currentState = "q1";
-//
-//        for (char i : detect.toCharArray())
-//            System.out.println(i);
-//
-//        for (char i : detect.toCharArray()) {
-//            for (Transition t : transitions) {
-//                if (currentState.equals(t.fromState) && i == t.variable) {
-//                    currentState = t.toState;
-//                    System.out.print(currentState + " ");
-//                    break;
-//                }
-//            }
-//        }
-//
-//        if (Arrays.asList(goalStates).contains(currentState))
-//            System.out.println("Accepted");
-//        else
-//            System.out.println("Rejected");
     }
 }

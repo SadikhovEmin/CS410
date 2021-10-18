@@ -1,0 +1,15 @@
+q1  q2  q2  
+Accepted
+
+q1  q2  q2  q1  q1  q2  q2  q1  q1  
+Rejected
+
+q1  q1  q1  q2  
+Accepted
+
+q1  q1  q1  q1  
+Rejected
+
+q2  q2  q2  q1  
+Rejected
+
