@@ -1,8 +1,7 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +18,8 @@ public class Main {
             String[] states = new String[0];
             String[] goalStates = new String[0];
             char[] variables = new char[0];
+            List<Transition> transitions = new ArrayList<>();
+            List<String> stringsToDetect = new ArrayList<>();
 
 
 //            states = new String[numberOfStates];
@@ -27,12 +28,18 @@ public class Main {
             while (scanner.hasNext()) {
                 String s = scanner.next();
 
-                if (count == 0)
+                if (count == 0) {
                     numberOfStates = Integer.parseInt(s);
-                else if (count == 1)
+                    count++;
+                }
+                else if (count == 1) {
                     numberOfVariables = Integer.parseInt(s);
-                else if (count == 2)
+                    count++;
+                }
+                else if (count == 2) {
                     numberOfGoalStates = Integer.parseInt(s);
+                    count++;
+                }
                 else if (count == 3) {
                     states = new String[numberOfStates];
 
@@ -41,6 +48,7 @@ public class Main {
                         if (i != numberOfStates - 1)
                             s = scanner.next();
                     }
+                    count++;
                 }
                 else if (count == 4) {
                     goalStates = new String[numberOfGoalStates];
@@ -50,6 +58,7 @@ public class Main {
                         if (i != numberOfGoalStates - 1)
                             s = scanner.next();
                     }
+                    count++;
                 }
                 else if (count == 5) {
                     variables = new char[numberOfVariables];
@@ -59,10 +68,30 @@ public class Main {
                         if (i != numberOfVariables - 1)
                             s = scanner.next();
                     }
+                    count++;
+                }
+                else if (count == 6) {
+
+                    for (int i = 0; i < numberOfStates * numberOfVariables; i++) {
+                        String fromState = s;
+//                        System.out.print(s + " ");
+                        s = scanner.next();
+//                        System.out.print(s + " ");
+                        char variable = s.charAt(0);
+                        s = scanner.next();
+//                        System.out.print(s + " ");
+                        String toState = s;
+
+                        transitions.add(new Transition(fromState, variable, toState));
+                        s = scanner.next();
+
+                    }
+//                    System.out.println(s);
+                    count++;
                 }
 
-                count++;
-//                System.out.println(s);
+                if (count == 7)
+                    stringsToDetect.add(s);
 
 
             }
@@ -73,6 +102,12 @@ public class Main {
             System.out.println("states " + Arrays.toString(states));
             System.out.println("goal states " + Arrays.toString(goalStates));
             System.out.println("variables " + Arrays.toString(variables));
+
+
+            for (Transition i : transitions)
+                System.out.println(i);
+            for (String s : stringsToDetect)
+                System.out.println(s);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

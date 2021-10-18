@@ -9,4 +9,13 @@ public class Transition {
         this.variable = variable;
         this.toState = toState;
     }
+
+    @Override
+    public String toString() {
+        return "Transition{" +
+                "fromState='" + fromState + '\'' +
+                ", variable=" + variable +
+                ", toState='" + toState + '\'' +
+                '}';
+    }
 }
