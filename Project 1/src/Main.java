@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -9,6 +11,7 @@ public class Main {
 
         try {
             Scanner scanner = new Scanner(file);
+            FileWriter fileWriter = new FileWriter("output.txt");
 
 
             int count = 0;      // To correctly assign values from file to variables
@@ -133,18 +136,28 @@ public class Main {
                         if (currentState.equals(t.fromState) && j == t.variable) {
                             currentState = t.toState;
                             System.out.println(currentState + " ");
+                            fileWriter.write(currentState + "  ");
                             break;
                         }
                     }
                 }
 
-                if (Arrays.asList(goalStates).contains(currentState))
+                fileWriter.write("\n");
+
+                if (Arrays.asList(goalStates).contains(currentState)) {
                     System.out.println("Accepted");
-                else
+                    fileWriter.write("Accepted\n");
+                }
+                else {
                     System.out.println("Rejected");
+                    fileWriter.write("Rejected\n");
+                }
 
                 currentState = "q1";
+                fileWriter.write("\n");
             }
+
+            fileWriter.close();
 
 
 
@@ -153,8 +166,9 @@ public class Main {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
 
 
 //
