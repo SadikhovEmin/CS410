@@ -96,6 +96,10 @@ public class Main {
 
             }
 
+
+            /**
+             * Print all variables to check correctness with file
+             */
             System.out.println("number of states "  + numberOfStates);
             System.out.println("number of variables " + numberOfVariables);
             System.out.println("number of goal states" + numberOfGoalStates);
@@ -108,6 +112,44 @@ public class Main {
                 System.out.println(i);
             for (String s : stringsToDetect)
                 System.out.println(s);
+
+
+            /**
+             * Computation
+             */
+            System.out.println("------------------ Computation ------------------");
+
+            String currentState = "q1";
+
+            for (String i : stringsToDetect) {
+                for (char j : i.toCharArray())
+                    System.out.print(j + " ");
+                System.out.println();
+            }
+
+            for (String i : stringsToDetect) {
+                for (char j : i.toCharArray()) {
+                    for (Transition t : transitions) {
+                        if (currentState.equals(t.fromState) && j == t.variable) {
+                            currentState = t.toState;
+                            System.out.println(currentState + " ");
+                            break;
+                        }
+                    }
+                }
+
+                if (Arrays.asList(goalStates).contains(currentState))
+                    System.out.println("Accepted");
+                else
+                    System.out.println("Rejected");
+
+                currentState = "q1";
+            }
+
+
+
+
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
