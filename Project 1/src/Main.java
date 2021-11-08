@@ -147,8 +147,10 @@ public class Main {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Not valid file");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error");
         }
     }
 }
