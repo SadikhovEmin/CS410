@@ -16,6 +16,8 @@ public class ReadFile {
     private String startState;
     private List<String> goalStates;
     private List<String> stackAlphabet;
+    private List<Transition> transitions;
+    private List<String> stringsToDetect;
 
     public ReadFile(File file) {
         this.file = file;
@@ -23,6 +25,8 @@ public class ReadFile {
         inputAlphabets = new ArrayList<>();
         goalStates = new ArrayList<>();
         stackAlphabet = new ArrayList<>();
+        transitions = new ArrayList<>();
+        stringsToDetect = new ArrayList<>();
         initializeVariables();
     }
 
@@ -90,6 +94,30 @@ public class ReadFile {
                     }
                     count++;
                 }
+                else if (count == 10) {
+                    String[] line = scanner.nextLine().split(" ");
+                    boolean temp = true;       // to assign previously taken scanner.next() correctly
+                    while (scanner.hasNextLine() && line.length > 4) {
+                        Transition e;
+
+                        if (temp) {
+                            e = new Transition(s, line[1], line[2], line[3], line[4]);
+                            temp = false;
+                        }
+                        else
+                             e = new Transition(line[0], line[1], line[2], line[3], line[4]);
+
+                        System.out.println("e = " + e);
+                        transitions.add(e);
+                        line = scanner.nextLine().split(" ");
+                        s = line[0];
+                    }
+                    stringsToDetect.add(s);
+                    count++;
+                }
+                else if (count == 11) {
+                    stringsToDetect.add(s);
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -137,7 +165,15 @@ public class ReadFile {
         return goalStates;
     }
 
+    public List<Transition> getTransitions() {
+        return transitions;
+    }
+
     public List<String> getStackAlphabet() {
         return stackAlphabet;
+    }
+
+    public List<String> getStringsToDetect() {
+        return stringsToDetect;
     }
 }
