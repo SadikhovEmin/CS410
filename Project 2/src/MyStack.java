@@ -2,13 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyStack {
-    private List<String> variables;
+    public List<String> variables = new ArrayList<>();
+    public String initialStackSymbol = "";
+
 
     public MyStack() {
-        variables = new ArrayList<>();
+
+    }
+
+    public MyStack(MyStack another) {
+        this.variables = another.variables;
+        this.initialStackSymbol = another.initialStackSymbol;
     }
 
     public void push(String s) {
+        if (s.equals("ε"))
+            return;
         variables.add(s);
     }
 
@@ -22,6 +31,14 @@ public class MyStack {
             variables.remove(variables.size() - 1);
             return last;
         }
+    }
+
+    public String head() {
+        return variables.get(variables.size() - 1);
+    }
+
+    public List<String> getVariables() {
+        return variables;
     }
 
     @Override

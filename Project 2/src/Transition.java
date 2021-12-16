@@ -13,6 +13,34 @@ public class Transition {
         this.toState = toState;
     }
 
+    public boolean isEmptyRead() {
+        return variable.equals("ε");
+    }
+
+    public boolean isNondeterministic() {
+        return variable.equals("ε") && pop.equals("ε") && push.equals("ε");
+    }
+
+    public String getFromState() {
+        return fromState;
+    }
+
+    public String getVariable() {
+        return variable;
+    }
+
+    public String getPop() {
+        return pop;
+    }
+
+    public String getPush() {
+        return push;
+    }
+
+    public String getToState() {
+        return toState;
+    }
+
     @Override
     public String toString() {
         return "Transition{" +

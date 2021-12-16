@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 public class PDA {
     private MyStack stack;
@@ -24,37 +23,31 @@ public class PDA {
                 System.out.println();
             }
 
-            for (String i : file.getStringsToDetect()) {
-                for (char j : i.toCharArray()) {
-                    for (Transition t : file.getTransitions()) {
-//                        System.out.println("1 : "  + currentState.equals(t.getFromState()));
-//                        System.out.println("2 : " + (j == t.getVariable().charAt(0)));
-//                        System.out.println(j + " " + t.getVariable().charAt(0));
-                        System.out.println(currentState.equals(t.getFromState()) + " " + (j == t.getVariable().charAt(0) || j == 'ε'));
 
-                        if (currentState.equals(t.getFromState()) && (j == t.getVariable().charAt(0) || j == 'ε')) {
-                            System.out.println("Girdi");
-                            currentState = t.getToState();
-                            System.out.println(currentState + " ");
-                            fileWriter.write(currentState + "  ");
-                            break;
-                        }
-                    }
-                }
+            for (String i : file.getStringsToDetect()) {            // Iterates over the inputs
+//                fileWriter.write(currentState + "  ");
 
-                fileWriter.write("\n");
 
-                if (file.getGoalStates().contains(currentState)) {
+                Recursion recursion = new Recursion(file);
+                recursion.path.add(currentState);
+                List<String> result = recursion.iterate(file, i);
+                fileWriter.write(result + "");
+
+//                System.out.println("result = " + result);
+
+
+                if (file.getGoalStates().contains(result.get(result.size() - 1))) {
                     System.out.println("Accepted");
-                    fileWriter.write("Accepted\n");
-                }
-                else {
+                    fileWriter.write("\nAccepted\n");
+                } else {
                     System.out.println("Rejected");
-                    fileWriter.write("Rejected\n");
+                    fileWriter.write("\nRejected\n");
                 }
 
                 currentState = file.getStartState();
                 fileWriter.write("\n");
+
+
             }
 
             fileWriter.close();
@@ -63,6 +56,5 @@ public class PDA {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

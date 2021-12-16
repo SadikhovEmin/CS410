@@ -107,7 +107,6 @@ public class ReadFile {
                         else
                              e = new Transition(line[0], line[1], line[2], line[3], line[4]);
 
-                        System.out.println("e = " + e);
                         transitions.add(e);
                         line = scanner.nextLine().split(" ");
                         s = line[0];
@@ -122,6 +121,7 @@ public class ReadFile {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Not valid file");
         }
     }
 
