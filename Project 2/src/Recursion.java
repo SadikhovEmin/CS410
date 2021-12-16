@@ -28,10 +28,13 @@ public class Recursion {
 
         for (Transition t : file.getTransitions()) {
             if (t.getFromState().equals(path.get(path.size() - 1))) {
-
-                if (t.isNondeterministic())
-                {
-                    return null;
+                if (t.isNondeterministic()) {
+                    MyStack recursiveStack = new MyStack(stack);
+                    Recursion parallel = new Recursion(file, recursiveStack);
+                    parallel.path.add(t.getToState());
+//                    return parallel.iterate(file, input);
+                    path.addAll(parallel.iterate(file, input));
+                    return path;
                 }
                 else if (t.isEmptyRead()) {     // Empty read
                     MyStack recursiveStack = new MyStack(stack);

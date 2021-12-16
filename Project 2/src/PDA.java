@@ -23,6 +23,10 @@ public class PDA {
                 System.out.println();
             }
 
+            file.getTransitions().removeIf(t -> t.getFromState().equals(t.getToState()) && t.isNondeterministic());
+
+            System.out.println("Transitions updated : " + file.getTransitions());
+
 
             for (String i : file.getStringsToDetect()) {            // Iterates over the inputs
 //                fileWriter.write(currentState + "  ");
@@ -33,7 +37,7 @@ public class PDA {
                 List<String> result = recursion.iterate(file, i);
                 fileWriter.write(result + "");
 
-//                System.out.println("result = " + result);
+                System.out.println("result = " + result);
 
 
                 if (file.getGoalStates().contains(result.get(result.size() - 1))) {
