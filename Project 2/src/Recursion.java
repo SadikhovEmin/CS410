@@ -32,7 +32,6 @@ public class Recursion {
                     MyStack recursiveStack = new MyStack(stack);
                     Recursion parallel = new Recursion(file, recursiveStack);
                     parallel.path.add(t.getToState());
-//                    return parallel.iterate(file, input);
                     path.addAll(parallel.iterate(file, input));
                     return path;
                 }
@@ -45,17 +44,15 @@ public class Recursion {
                             recursiveStack.push(t.getPush());
                             parallel.path.add(t.getToState());
                             path.addAll(parallel.iterate(file, input));
-//                            return parallel.iterate(file, input);
                         }
                     } else {
                         recursiveStack.push(t.getPush());
                         parallel.path.add(t.getToState());
                         path.addAll(parallel.iterate(file, input));
-
-
-//                        return parallel.iterate(file, input);
                     }
+
                     return path;
+
                 } else {
                     if (path.get(path.size() - 1).equals(t.getFromState()) && input.length() != 0) {
                         if (t.getVariable().equals(input.charAt(0) + "")) {
@@ -64,13 +61,11 @@ public class Recursion {
                                     stack.pop();
                                     stack.push(t.getPush());
                                     path.add(t.getToState());
-//                                    path.addAll(this.iterate(file, input.substring(1)));
                                     return this.iterate(file, input.substring(1));
                                 }
                             } else {
                                 stack.push(t.getPush());
                                 path.add(t.getToState());
-//                                path.addAll(this.iterate(file, input.substring(1)));
                                 return this.iterate(file, input.substring(1));
                             }
                             return path;

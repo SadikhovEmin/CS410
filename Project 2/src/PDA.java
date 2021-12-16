@@ -29,16 +29,12 @@ public class PDA {
 
 
             for (String i : file.getStringsToDetect()) {            // Iterates over the inputs
-//                fileWriter.write(currentState + "  ");
-
-
                 Recursion recursion = new Recursion(file);
                 recursion.path.add(currentState);
                 List<String> result = recursion.iterate(file, i);
                 fileWriter.write(result + "");
 
                 System.out.println("result = " + result);
-
 
                 if (file.getGoalStates().contains(result.get(result.size() - 1))) {
                     System.out.println("Accepted");
@@ -50,12 +46,8 @@ public class PDA {
 
                 currentState = file.getStartState();
                 fileWriter.write("\n");
-
-
             }
-
             fileWriter.close();
-
 
         } catch (IOException e) {
             e.printStackTrace();
