@@ -1,0 +1,4 @@
+q1 q2 q3 q5 q5 q2 q2 qA
+Accepted
+q1 q2 q3 q4 qR
+Rejected
