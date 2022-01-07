@@ -59,8 +59,6 @@ public class TuringMachine {
                         break;
                     }
                 }
-
-//                System.out.println("tape final" + tape);
             }
 
             fileWriter.close();
